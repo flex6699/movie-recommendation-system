@@ -5,9 +5,11 @@ import pickle
 import requests
 from sklearn.metrics.pairwise import cosine_similarity
 
+import os
 
+streamlit_api_key = os.environ.get('STREAMLIT_API_KEY')
 def fetch_poster(id):
-    response=requests.get("https://api.themoviedb.org/3/movie/{}?api_key=187ddd0030ceb631624254ff8728e286&language=en-US".format(id))
+    response=requests.get(f"https://api.themoviedb.org/3/movie/{id}?api_key={streamlit_api_key}&language=en-US")
     data=response.json()
     print(data["poster_path"])
     return "https://image.tmdb.org/t/p/w500/"+data["poster_path"]
